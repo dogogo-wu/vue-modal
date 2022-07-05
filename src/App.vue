@@ -1,17 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>{{ title }}</h1>
+  <br>
+  <Modal v-if="isClick" />
+  <input type="text" ref="name">
+  <button @click="handleClick">Click me</button>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Modal from './components/Modal.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components:{
+    Modal
+  },
+  data() {
+    return {
+      title: 'My First Vue App!',
+      isClick: false
+    };
+  },
+  methods: {
+    handleClick() {
+      console.log(this.$refs.name);
+      this.$refs.name.classList.add('active');
+      this.$refs.name.focus();
+      this.isClick = !this.isClick;
+    }
+  },
+};
 </script>
 
 <style>
@@ -22,5 +39,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+h1{
+  display: inline-block;
+  border-bottom: 3px solid #45a2ff;
+  padding-bottom: 5px;
 }
 </style>
